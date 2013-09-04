@@ -53,6 +53,37 @@ public class MemberDao {
 			}
 		}		
 	}
+
+	public int add(String email, String mname, String password, String tel,
+			String blog) throws Exception {
+		Connection con = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			con = conPool.getConnection();
+			stmt = con.prepareStatement(
+				"insert into SPMS_MEMBS(EMAIL, MNAME, PWD, TEL, BLOG, REG_DATE)"
+				+ " values(?,?,?,?,?,now())");
+			stmt.setString(1, email);
+			stmt.setString(2, mname);
+			stmt.setString(3, password);
+			stmt.setString(4, tel);
+			stmt.setString(5, blog);
+			return stmt.executeUpdate();
+			
+		} catch (Exception e) {
+			throw e;
+			
+		} finally {
+			try {stmt.close();} catch(Exception e) {}
+			if (con != null) {
+				conPool.returnConnection(con);
+			}
+		}
+	}
+}
+	
+	
 /*
 	public List<Member> list() throws Exception {
 		Connection con = null;
@@ -88,34 +119,9 @@ public class MemberDao {
 			}
 		}
 	}
+*/
 
-	public int add(Member member) throws Exception {
-		Connection con = null;
-		PreparedStatement stmt = null;
-		
-		try {
-			con = conPool.getConnection();
-			stmt = con.prepareStatement(
-				"insert into MEMBERS(MNAME,PHONE,EMAIL,BLOG,AGE,REG_DATE)"
-				+ " values(?,?,?,?,?,now())");
-			stmt.setString(1, member.getName());
-			stmt.setString(2, member.getPhone());
-			stmt.setString(3, member.getEmail());
-			stmt.setString(4, member.getBlog());
-			stmt.setInt(5, member.getAge());
-			return stmt.executeUpdate();
-			
-		} catch (Exception e) {
-			throw e;
-			
-		} finally {
-			try {stmt.close();} catch(Exception e) {}
-			if (con != null) {
-				conPool.returnConnection(con);
-			}
-		}
-	}
-
+/*
 	public Member get(String email) throws Exception {
 		Connection con = null;
 		Statement stmt = null;
@@ -206,7 +212,8 @@ public class MemberDao {
 		}
 	}
 */
-}
+
+
 
 
 
