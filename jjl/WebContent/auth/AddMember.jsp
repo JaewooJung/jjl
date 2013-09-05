@@ -47,13 +47,31 @@
     </div>
 
 
+<div class="container">
+
+      <div class="page-header">
+        <h1>새로 오신 것을 환영합니다.</h1>
+        <p class="lead">지금 가입하셔서 JJL 프로젝트의 다양한 서비스를 무료로 체험할 수 있는 기회를 만나보세요!</p>
+      </div>
+      
+      <div class="alert alert-info">
+        <strong>아래 필수 정보를 입력하고 Sign in 버튼을 누르시면 가입이 완료됩니다!</strong>
+      </div>
+      
+      
+      
+  </div> <!-- /container -->
+  
+  
+  
+  
     <div class="container">
 
       <form class="form-signin" action="add" method="post">
-        <h2 class="form-signin-heading" align="center"><br><br>등록정보 입력 </h2>
+        <h2 class="form-signin-heading" align="center"> </h2>
         이메일 <input type="text" class="form-control" name="email" >
         이름 <input type="text" class="form-control" name="mname" >
-        비밀번호 <input type="text" class="form-control" name="password" >
+        비밀번호 <input type="password" class="form-control" name="password" >
         전화번호 <input type="text" class="form-control" name="tel" >
         블로그 <input type="text" class="form-control" name="blog" >
         <br>

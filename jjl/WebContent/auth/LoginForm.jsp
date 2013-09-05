@@ -87,21 +87,33 @@
         
         
 		<%
-		    if(cookies != null){
-		   	for (int i = 0; i < cookies.length; i++){
+		    boolean bb = false;
+			if(cookies != null){
+		   		for (int i = 0; i < cookies.length; i++){
 			           cookie = cookies[i];
 			           if(cookie.getName().equals("saveId")){
-			        	   out.print("<input type=\"checkbox\" name=\"saveId\" checked = \"checked\"> ID 저장 ");
-					        
+			        	   if(cookie.getValue().equals("on")){
+			        	   bb = true;
+			        	   }
 			           }
 			        }
+		   		
+		   		if(bb){
+		   			out.print("<input type=\"checkbox\" name=\"saveId\" checked = \"on\"> ID 저장 ");
+		   		}else{
+
+		   			out.print("<input type=\"checkbox\" name=\"saveId\" > ID 저장 ");
+		   		}
+		   		
+		   		
+		   		
 		    }else{
 		    	out.print("<input type=\"checkbox\" name=\"saveId\" > ID 저장 ");
 		        
 		    }
 		   	
 		%>
-                
+         
         <button class="btn btn-lg btn-primary btn-block" type="submit" value="Login">Log In </button>
       </form>
 <form class="form-signin" action="AddMember.jsp" method="post">

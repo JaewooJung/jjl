@@ -36,21 +36,53 @@ public class AddServlet extends HttpServlet {
 		String tel = request.getParameter("tel");
 		String blog = request.getParameter("blog");
 		
-		
 		MemberDao memberDao = 
 				(MemberDao) this.getServletContext().getAttribute("memberDao");
 		
-		out.println("멤버가 추가되었습니다. 로그인 화면으로 이동합니다.");
-		response.setHeader(
-				"Refresh", "2;url=LoginForm.jsp");
-		try {
-			memberDao.add(email, mname, password, tel, blog);
+		
+		if("".equals(email) | "".equals(mname) | "".equals(password) | "".equals(tel) | "".equals(blog)){
 			
-		} catch (Exception e) {
-			e.printStackTrace();
-			out.println("<html><head><title>시스템오류!</title></head>");
-			out.println("<body><p>실행 오류입니다.</p></body></html>");
+			out.println("다음 필드를 입력하고 다시 시도해주세요.<br>");
+			if("".equals(email)){
+				out.println("이메일<br> ");
+			}
+			if("".equals(mname)){
+				out.println("이름<br>");
+			}
+			if("".equals(password)){
+				out.println("비밀번호<br>");
+			}
+			if("".equals(tel)){
+				out.println("전화번호<br>");
+			}
+			if("".equals(blog)){
+				out.println("블로그<br>");
+			}
+			
+			response.setHeader(
+					"Refresh", "2;url=AddMember.jsp");
+			
+			
+		}else{
+			
+			try {
+				memberDao.add(email, mname, password, tel, blog);
+				out.println("멤버가 추가되었습니다. 로그인 화면으로 이동합니다.");
+				response.setHeader(
+						"Refresh", "2;url=LoginForm.jsp");
+				
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				out.println("<html><head><title>시스템오류!</title></head>");
+				out.println("<body><p>실행 오류입니다.</p></body></html>");
+			}
+			
 		}
+		
+		
+		
+		
 	}
 
 }
